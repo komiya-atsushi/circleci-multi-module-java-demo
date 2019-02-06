@@ -1,0 +1,52 @@
+version: 2.1
+
+jobs:
+  test_submodule:
+    parameters:
+      submodule_name:
+        type: enum
+        enum: ['submodule-1', 'submodule-2']
+    docker:
+      - image: circleci/openjdk:11
+    steps:
+      - checkout
+      - restore_cache:
+          key: gradle-repo
+      - run: ./gradlew clean << parameters.submodule_name >>:test
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: gradle-repo
+  test_all:
+    docker:
+      - image: circleci/openjdk:11
+    steps:
+      - checkout
+      - restore_cache:
+          key: gradle-repo
+      - run: ./gradlew clean test
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: gradle-repo
+
+workflows:
+  test_all:
+    jobs:
+      - test_all
+  test_submodule_1:
+    jobs:
+      - test_submodule:
+          name: test_submodule_1
+          submodule_name: 'submodule-1'
+          filters:
+            branches:
+              only: 'release-submodule-1'
+  test_submodule_2:
+    jobs:
+      - test_submodule:
+          name: test_submodule_2
+          submodule_name: 'submodule-2'
+          filters:
+            branches:
+              only: 'release-submodule-2'
