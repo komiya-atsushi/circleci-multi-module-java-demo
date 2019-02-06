@@ -1,2 +1,3 @@
 rootProject.name = 'circleci-java-multi-module-demo'
 include 'submodule-1'
+include 'submodule-2'
