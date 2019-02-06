@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+
+    dependencies {
+        classpath 'net.researchgate:gradle-release:2.6.0'
+    }
+}
+
+group 'me.k11i'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'net.researchgate.release'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation platform(group: 'org.junit', name: 'junit-bom', version: '5.3.2')
+        testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api'
+        testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine'
+    }
+}
