@@ -8,6 +8,9 @@ test {
 }
 
 release {
+    preTagCommitMessage = '[skip ci] [Gradle Release Plugin] - pre tag commit: '
+    tagCommitMessage = '[skip ci] [Gradle Release Plugin] - creating tag: '
+    newVersionCommitMessage = '[skip ci] [Gradle Release Plugin] - new version commit: '
     tagTemplate = 'submodule-2-${version}'
     git {
         requireBranch = 'release-submodule-2'
