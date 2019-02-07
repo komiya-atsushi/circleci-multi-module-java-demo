@@ -12,7 +12,12 @@ jobs:
       - checkout
       - restore_cache:
           key: gradle-repo
-      - run: ./gradlew clean test << parameters.submodule_name >>:release
+      - run:
+          name: Gradle release
+          environment:
+            EMAIL: komiya.atsushi@gmail.com
+            GIT_AUTHOR_NAME: KOMIYA Atsushi
+          command: ./gradlew clean test << parameters.submodule_name >>:release
       - save_cache:
           paths:
             - ~/.gradle
