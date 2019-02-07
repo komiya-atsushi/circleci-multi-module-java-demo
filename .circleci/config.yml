@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  test_submodule:
+  release_submodule:
     parameters:
       submodule_name:
         type: enum
@@ -12,7 +12,7 @@ jobs:
       - checkout
       - restore_cache:
           key: gradle-repo
-      - run: ./gradlew clean << parameters.submodule_name >>:test
+      - run: ./gradlew clean << parameters.submodule_name >>:release --Prelease.git.requireBranch=release-<< parameters.submodule_name >>
       - save_cache:
           paths:
             - ~/.gradle
@@ -34,18 +34,18 @@ workflows:
   test_all:
     jobs:
       - test_all
-  test_submodule_1:
+  release_submodule_1:
     jobs:
-      - test_submodule:
-          name: test_submodule_1
+      - release_submodule:
+          name: release_submodule_1
           submodule_name: 'submodule-1'
           filters:
             branches:
               only: 'release-submodule-1'
   test_submodule_2:
     jobs:
-      - test_submodule:
-          name: test_submodule_2
+      - release_submodule:
+          name: release_submodule_2
           submodule_name: 'submodule-2'
           filters:
             branches:
