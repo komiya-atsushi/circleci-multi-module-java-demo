@@ -17,7 +17,7 @@ jobs:
           environment:
             EMAIL: komiya.atsushi@gmail.com
             GIT_AUTHOR_NAME: KOMIYA Atsushi
-          command: ./gradlew clean test << parameters.submodule_name >>:release
+          command: ./gradlew clean test << parameters.submodule_name >>:release --no-daemon
       - save_cache:
           paths:
             - ~/.gradle
