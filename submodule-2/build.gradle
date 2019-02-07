@@ -8,7 +8,7 @@ test {
 }
 
 release {
-    tagTemplate = 'submodule-1-${version}'
+    tagTemplate = 'submodule-2-${version}'
     git {
         requireBranch = 'release-submodule-2'
     }
