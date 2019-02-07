@@ -14,11 +14,9 @@ jobs:
           key: gradle-repo
       - run:
           name: Gradle release
-          environment:
-            EMAIL: komiya.atsushi@gmail.com
-            GIT_AUTHOR_NAME: KOMIYA Atsushi
           command: |
-            env
+            git config --local user.name "KOMIYA Atsushi"
+            git config --local user.email "komiya.atsushi@gmail.com"
             ./gradlew clean test << parameters.submodule_name >>:release --no-daemon
       - save_cache:
           paths:
