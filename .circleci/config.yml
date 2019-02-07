@@ -12,7 +12,7 @@ jobs:
       - checkout
       - restore_cache:
           key: gradle-repo
-      - run: ./gradlew clean << parameters.submodule_name >>:release --Prelease.git.requireBranch=release-<< parameters.submodule_name >>
+      - run: ./gradlew clean test << parameters.submodule_name >>:release
       - save_cache:
           paths:
             - ~/.gradle
