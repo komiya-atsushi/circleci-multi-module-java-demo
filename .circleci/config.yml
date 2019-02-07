@@ -14,6 +14,13 @@ jobs:
           key: gradle-repo
       - run:
           name: Gradle release
+          # git は本来、コミット時に必要となる user.name/user.email の情報を環境変数で与えることができるはず (下記参照)
+          # https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0#_%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88
+          # なのだが、Docker コンテナにおいて root ユーザでない場合に git commit すると "Please tell me who you are." の
+          # エラーが出てしまうため、やむなく git config で user.name/user.email を指定している。
+#          environment:
+#            - GIT_AUTHOR_NAME: "KOMIYA Atsushi"
+#            - GIT_AUTHOR_EMAIL: komiya.atsushi@gmail.com
           command: |
             git config --local user.name "KOMIYA Atsushi"
             git config --local user.email "komiya.atsushi@gmail.com"
